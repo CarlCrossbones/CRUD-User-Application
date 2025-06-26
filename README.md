@@ -1,6 +1,33 @@
 # CRUD-User-Application
 A CRUD (Create, Read, Update, Delete) User Application consisting of a Java SpringBoot API backend utilizing Java Persistence API and a PostgreSQL database housing Users (name, birth state, age).
 
+Version: 0.0.1
+
+### Table of Contents
+
+## Architecture Design
+
+## Backend Configuration
+
+## Database Configuration
+
+## Running the Service
+
+### Running Outside of a Container
+
+#### Local Dependencies
+
+#### Local Tests
+
+### Running the Containerized Service
+
+#### Smoke Tests
+
+## Development Log
+- 0.0.1 Added Documentation Template
+
+
+
 # Requirements
 Create a CRUD application that allows users to be created and updated within a system. In this scenario, let's say a user has a name, age, and birth state. The application should:
 - Create a public project in your github account
