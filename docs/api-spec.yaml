@@ -1,1 +1,281 @@
-
+openapi: 3.0.2
+info:
+    title: CRUD User Application API
+    version: 1.0.0
+    description: >-
+        A CRUD (Create, Read, Update, Delete) User Application consisting of a Java SpringBoot API backend
+        utilizing Java Persistence API and a PostgreSQL database housing Users (name, birth state, age).
+    contact:
+        name: G. Carl Wilkerson
+        email: gcwilkerson101@gmail.com
+paths:
+    /users:
+        description: The base endpoint for the service.
+        get:
+            parameters:
+                -
+                    name: name
+                    description: Returns a unique user with the given name.
+                    schema:
+                        type: string
+                    in: query
+                    required: false
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items: {}
+                            examples:
+                                No Parameters:
+                                    value:
+                                        -
+                                            id: 1
+                                            name: John Smith
+                                            age: 51
+                                            birth-state: OK
+                                id=1:
+                                    value:
+                                        -
+                                            id: 1
+                                            name: John Smith
+                                            age: 51
+                                            birth-state: OK
+                                name="John Smith":
+                                    value:
+                                        -
+                                            id: 1
+                                            name: John Smith
+                                            age: 51
+                                            birth-state: OK
+                                age=51:
+                                    value:
+                                        -
+                                            id: 1
+                                            name: John Smith
+                                            age: 51
+                                            birth-state: OK
+                                birth-state="OK":
+                                    value:
+                                        -
+                                            id: 1
+                                            name: John Smith
+                                            age: 51
+                                            birth-state: OK
+                    description: >-
+                        Returns all users given no parameters. Returns specific or group of users given
+                        certain parameters.
+                '400':
+                    description: Bad Request
+                '422':
+                    description: No User matches given parameters
+            description: >-
+                Returns a list of all users when queried with no parameters. Returns specific or group user
+                data when queried with parameters.
+        parameters:
+            -
+                name: id
+                description: Returns a unique user's information.
+                schema:
+                    type: number
+                in: query
+                required: false
+            -
+                name: name
+                description: Returns all users with the given name.
+                schema:
+                    type: string
+                in: query
+                required: false
+            -
+                name: age
+                description: Returns all users with given age.
+                schema:
+                    type: integer
+                in: query
+                required: false
+            -
+                name: birth-state
+                description: Returns all users with given birth-state.
+                schema:
+                    type: string
+                in: query
+                required: false
+    /users/create:
+        description: Adds a user to the database.
+        post:
+            requestBody:
+                description: ''
+                content:
+                    application/json:
+                        schema:
+                            type: string
+                        examples:
+                            USER:
+                                value:
+                                    name: John Smith
+                                    age: 51
+                                    birth-state: OK
+                required: true
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                USER:
+                                    value:
+                                        name: John Smith
+                                        age: 51
+                                        birth-state: OK
+                    description: 'Successfully added user:'
+                '400':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                USER:
+                                    value:
+                                        name: John Smith
+                                        age: 51
+                                        birth-state: OK
+                    description: 'There was an error adding the user:'
+                '422':
+                    description: User with name <NAME> already exists
+            description: Creates a new user entry in the database.
+    /users/update:
+        description: Updates a user's information given their name or id.
+        patch:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: string
+                        examples:
+                            NAME:
+                                value:
+                                    name: John Smith
+                                    update:
+                                        name: Bill Smith
+                            AGE:
+                                value:
+                                    name: John Smith
+                                    update:
+                                        age: 52
+                            BIRTH-STATE:
+                                value:
+                                    name: John Smith
+                                    update:
+                                        birth-state: PA
+                            MULTIPLE:
+                                value:
+                                    name: John Smith
+                                    update:
+                                        name: Bill Smith
+                                        age: 52
+                                        birth-state: PA
+                            BY ID:
+                                value:
+                                    id: 1
+                                    update:
+                                        name: Bill Smith
+                                        age: 52
+                                        birth-state: PA
+                required: true
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                USER:
+                                    value:
+                                        id: 1
+                                        name: Bill Smith
+                                        age: 52
+                                        birth-state: PA
+                    description: 'Successfully Updated User:'
+                '400':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                USER:
+                                    value:
+                                        age: 51
+                                        update:
+                                            name: Bill Smith
+                                            age: 52
+                                            birth-state: PA
+                    description: Bad Request. One or more fields are invalid.
+                '422':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                USER:
+                                    value:
+                                        name: Sarah Smith
+                                        update:
+                                            name: Bill Smith
+                                            age: 52
+                                            birth-state: PA
+                    description: User not found in database.
+            description: Updates a user's information given a name or id.
+    /users/delete:
+        description: Deletes a user given a name or id.
+        delete:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: string
+                        examples:
+                            NAME:
+                                value:
+                                    name: John Smith
+                            ID:
+                                value:
+                                    id: 1
+                required: true
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                NAME:
+                                    value:
+                                        name: John Smith
+                                ID:
+                                    value:
+                                        ID: 1
+                    description: Successfully Deleted
+                '400':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                AGE:
+                                    value:
+                                        age: 51
+                    description: Field is invalid.
+                '422':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                NAME:
+                                    value:
+                                        name: Sarah Smith
+                    description: Could not find user in database
+            description: Deletes a user given a name or id.
