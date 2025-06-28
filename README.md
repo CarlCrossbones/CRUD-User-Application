@@ -1,14 +1,29 @@
 # CRUD-User-Application
 A CRUD (Create, Read, Update, Delete) User Application consisting of a Java SpringBoot API backend utilizing Java Persistence API and a PostgreSQL database housing Users (name, birth state, age).
 
-Version: 0.0.3
+Version: 0.0.4
 
 ### Table of Contents
+- [Local Dependencies](#local-dependencies)
+- [Backend Configuration](#backend-configuration)
+- [Database Configuration](#database-configuration)
+- [Running The Service](#running-the-service)
+    - [Running Outside of a Container](#running-outside-of-a-container)
+    - [Local Tests](#local-tests)
+    - [Running The Containerized Service](#running-the-containerized-service)
+    - [Smoke Tests](#smoke-tests)
+- [Development Log](#development-log)
+
+## Local Dependencies
+To run the service locally, you will need to install the following on your system:
+- openjdk@24
+- Maven
+- docker
 
 ## Backend Configuration
 
 ## Database Configuration
-The service utilizes a PostgreSQL for storage of user information. This database is hosted in a docker container via `docker-compose`. To run this database for local testing, run the following command:
+The service utilizes a PostgreSQL for storage of user information. This database is hosted in a docker container via `docker-compose`. To run this database for local testing and development, ensure docker is running and run the following command:
 ```bash
 docker compose up --build postgres
 ```
@@ -19,18 +34,27 @@ To kill the container, exit the Postgres viewer via Control-C and run the follow
 ```bash
 docker compose down -v
 ```
+**Database Credentials**
+- Database Name: userdb
+- Database Username: user
+- Database Password: password
 
-## Running the Service
+## Running The Service
 
 ### Running Outside of a Container
+For local development and testing, the Postgres database must be running. Please refer to [Database Configuration](#database-configuration). Before running either tests or the development server, you will need an `application.properties` file in the root of the project directory. See [application.properties.example](/docs/application.properties.example) for details.
 
-#### Local Dependencies
 
-#### Local Tests
+### Local Tests
+Unit tests are run with full integration with the Postgres database. To begin testing, ensure that the Postgres database is running by referring to [Database Configuration](#database-configuration).
+In a separate terminal from where you are running Postgres, run the tests by running:
+```bash
+mvn clean test
+```
 
 ### Running the Containerized Service
 
-To run the final product, first ensure that docker is running on your local device. Upon doing so, run the following command in the root of the repository directory:
+To run the whole service, first ensure that docker is running. Upon doing so, run the following command in the root of the repository directory:
 ```bash
 docker compose up
 ```
@@ -42,7 +66,8 @@ Once Spring is started, you may run [smoke tests](#smoke-tests) to demonstrate t
 ### Smoke Tests
 
 ## Development Log
-- 0.0.3 Initialized docker containerization
+- 0.0.4 Documented Test Integration
+- 0.0.3 Initialized Docker Containerization
 - 0.0.2 Initialized Project
 - 0.0.1 Added Documentation Template
 
