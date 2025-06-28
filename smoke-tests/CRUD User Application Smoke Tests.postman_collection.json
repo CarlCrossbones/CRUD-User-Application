@@ -1,0 +1,482 @@
+{
+	"info": {
+		"_postman_id": "c4451605-0684-496e-ad69-261eaaff629c",
+		"name": "CRUD User Application Smoke Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34541466"
+	},
+	"item": [
+		{
+			"name": "CREATE",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Smith\",\n    \"age\": 51,\n    \"birth-state\": \"OK\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n        \"name\": \"John Smith\",\n        \"age\": 51,\n        \"birth-state\": \"OK\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/users/create",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"create"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": null,
+							"cookie": [],
+							"body": "Successfully added user: \n{\n    \"id\": 1,\n    \"name\": \"John Smith\",\n    \"age\": 51,\n    \"birth-state\": \"OK\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "READ",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						},
+						"description": "Should return all entries in the database. Should return an empty array if there are none."
+					},
+					"response": [
+						{
+							"name": "Get All Users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/users",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users"
+									]
+								},
+								"description": "Should return all entries in the database. Should return an empty array if there are none."
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": null,
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"John Smith\",\n        \"age\": 51,\n        \"birth-state\": \"OK\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get First User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users?id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Should return only the first entry in the database if the database has any entries."
+					},
+					"response": [
+						{
+							"name": "Get First User",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/users?id=1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								},
+								"description": "Should return only the first entry in the database if the database has any entries."
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": null,
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"John Smith\",\n        \"age\": 51,\n        \"birth-state\": \"OK\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get User By Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users?name=\"John Smith\"",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "\"John Smith\""
+								}
+							]
+						},
+						"description": "Should return only the first entry in the database if the database has any entries."
+					},
+					"response": [
+						{
+							"name": "Get User By Name",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/users?name=\"John Smith\"",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "\"John Smith\""
+										}
+									]
+								},
+								"description": "Should return only the first entry in the database if the database has any entries."
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": null,
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"John Smith\",\n        \"age\": 51,\n        \"birth-state\": \"OK\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get User By Age",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users?age=51",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "age",
+									"value": "51"
+								}
+							]
+						},
+						"description": "Should return only the first entry in the database if the database has any entries."
+					},
+					"response": [
+						{
+							"name": "Get User By Age",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/users?age=51",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "age",
+											"value": "51"
+										}
+									]
+								},
+								"description": "Should return only the first entry in the database if the database has any entries."
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": null,
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"John Smith\",\n        \"age\": 51,\n        \"birth-state\": \"OK\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get User By Birth State",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users?birth-state=OK",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "birth-state",
+									"value": "OK"
+								}
+							]
+						},
+						"description": "Should return only the first entry in the database if the database has any entries."
+					},
+					"response": [
+						{
+							"name": "Get User By Age",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/users?birth-state=\"OK\"",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "birth-state",
+											"value": "\"OK\""
+										}
+									]
+								},
+								"description": "Should return only the first entry in the database if the database has any entries."
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": null,
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"John Smith\",\n        \"age\": 51,\n        \"birth-state\": \"OK\"\n    }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "UPDATE",
+			"item": [
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Smith\",\n  \"update\": {\n    \"name\": \"Bill Smith\",\n    \"age\": 52,\n    \"birth-state\": \"PA\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"update"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update User",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"John Smith\",\n  \"update\": {\n    \"name\": \"Bill Smith\",\n    \"age\": 52,\n    \"birth-state\": \"PA\"\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/users/update",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"update"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": null,
+							"cookie": [],
+							"body": "Sucessfully updated user:\n{\n  \"id\": 1,\n  \"name\": \"Bill Smith\",\n  \"age\": 52,\n  \"birth-state\": \"PA\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "DELETE",
+			"item": [
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Smith\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/delete",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"delete"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete User",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"John Smith\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/users/delete",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"delete"
+									]
+								}
+							},
+							"_postman_previewlanguage": "Text",
+							"header": null,
+							"cookie": [],
+							"body": "Successfully Deleted\n{\n    \"name\": \"John Smith\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
