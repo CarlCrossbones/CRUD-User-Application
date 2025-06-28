@@ -1,7 +1,7 @@
 # CRUD-User-Application
 A CRUD (Create, Read, Update, Delete) User Application consisting of a Java SpringBoot API backend utilizing Java Persistence API and a PostgreSQL database housing Users (name, birth state, age).
 
-Version: 0.0.4
+Version: 0.0.5
 
 ### Table of Contents
 - [Local Dependencies](#local-dependencies)
@@ -17,8 +17,8 @@ Version: 0.0.4
 ## Local Dependencies
 To run the service locally, you will need to install the following on your system:
 - openjdk@24
-- Maven
-- docker
+- Maven 3.9.10
+- docker:latest
 
 ## Backend Configuration
 
@@ -66,6 +66,7 @@ Once Spring is started, you may run [smoke tests](#smoke-tests) to demonstrate t
 ### Smoke Tests
 
 ## Development Log
+- 0.0.5 Added integration/unit tests for Create & Read Endpoints
 - 0.0.4 Documented Test Integration
 - 0.0.3 Initialized Docker Containerization
 - 0.0.2 Initialized Project

@@ -12,7 +12,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.http.MediaType;
 
@@ -52,19 +54,33 @@ class ReadTests {
         userRepository.deleteAll(); // Clear the repository after each test
     }
 	@Test
-    // TODO
 	// A test to see that hitting /users returns a list of all users
 	void testReturnsAllUsers() {
-		mockMvc.perform(get("/users"))
+		String responseJson = mockMvc.perform(get("/users"))
             .andExpect(status().isOk())
-            .andReturn();
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
+        
+        User[] users = new ObjectMapper().readValue(responseJson, User[].class);
+        Assertions.assertEquals(4, user.length);
+        Assertions.assertEquals("John Smith", users[0].getName());
+        Assertions.assertEquals("Jane Doe", users[3].getname());
 	}
 
     @Test
-    // TODO
 	// A test to see that hitting /users with a query parameter id returns a particular user
 	void testReturnsWithId() {
-		Assertions.assertTrue(true);
+		String jsonResponse = mockMvc.perform(get("/users").params("id", 1))
+            .andExpect(status().isOk())
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
+
+        User[] users = new ObjectMapper().readValue(json, User[].class);
+        User[] user = users[0];
+        Assertions.assertEquals(1, users.length);
+        Assertions.assertEquals("John Smith", user.getName());
 	}
 
     @Test
@@ -72,34 +88,61 @@ class ReadTests {
 	// A test to see that hitting /user with a query parameter name returns a particular user 
     // (the repository should only allow for one entry per name)
 	void testReturnsWithName() {
-		Assertions.assertTrue(true);
+		String jsonResponse = mockMvc.perform(get("/users").params("name", "John Smith"))
+            .andExpect(status().isOk())
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
+
+        User[] users = new ObjectMapper().readValue(json, User[].class);
+        User[] user = users[0];
+        Assertions.assertEquals(1, users.length);
+        Assertions.assertEquals("John Smith", user.getName());
 	}
 
     @Test
-    // TODO
 	// A test to see that hitting /user with a query parameter age returns all users of that age
 	void testReturnsWithAge() {
-		Assertions.assertTrue(true);
+		String jsonResponse = mockMvc.perform(get("/users").params("age", 51))
+            .andExpect(status().isOk())
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
+
+        User[] users = new ObjectMapper().readValue(json, User[].class);
+        Assertions.assertEquals(2, users.length);
+        Assertions.assertEquals("John Smith", user[0].getName());
+        Assertions.assertEquals("John Doe", user[1].getName());
 	}
 
     @Test
-    // TODO
 	// A test to see that hitting /user with a query parameter birth state returns all users of that birth state
 	void testReturnsWithState() {
-		Assertions.assertTrue(true);
+		String jsonResponse = mockMvc.perform(get("/users").params("birth-state", "TX"))
+            .andExpect(status().isOk())
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
+
+        User[] users = new ObjectMapper().readValue(json, User[].class);
+        Assertions.assertEquals(1, users.length);
+        Assertions.assertEquals("Jane Doe", user[0].getName());
 	}
 
     @Test
-    // TODO
 	// A test to see that bad input returns a 400
 	void testFlagsInvalidInput() {
-		Assertions.assertTrue(true);
+		mockMvc.perform(get("/users").params("foo", "bar"))
+            .andExpect(status().isBadRequest());
+
+        mockMvc.perform(get("/users").params("age", "bar"))
+            .andExpect(status().isBadRequest());
 	}
 
     @Test
-    // TODO
 	// A test to see that no user found with query parameters returns a 422.
 	void testFlagsNoUserFound() {
-		Assertions.assertTrue(true);
+		mockMvc.perform(get("/users").params("age", 21))
+            .andExpect(status().is4xxClientError());
 	}
 }
