@@ -1,15 +1,24 @@
 # CRUD-User-Application
 A CRUD (Create, Read, Update, Delete) User Application consisting of a Java SpringBoot API backend utilizing Java Persistence API and a PostgreSQL database housing Users (name, birth state, age).
 
-Version: 0.0.1
+Version: 0.0.3
 
 ### Table of Contents
-
-## Architecture Design
 
 ## Backend Configuration
 
 ## Database Configuration
+The service utilizes a PostgreSQL for storage of user information. This database is hosted in a docker container via `docker-compose`. To run this database for local testing, run the following command:
+```bash
+docker compose up --build postgres
+```
+
+This will allow for connections to the database via `localhost:5432/userdb`.
+
+To kill the container, exit the Postgres viewer via Control-C and run the following command:
+```bash
+docker compose down -v
+```
 
 ## Running the Service
 
@@ -21,9 +30,20 @@ Version: 0.0.1
 
 ### Running the Containerized Service
 
-#### Smoke Tests
+To run the final product, first ensure that docker is running on your local device. Upon doing so, run the following command in the root of the repository directory:
+```bash
+docker compose up
+```
+
+This will build both the Postgres database and the CRUD User Application. It will also handle integration of the two services.
+
+Once Spring is started, you may run [smoke tests](#smoke-tests) to demonstrate the service, or navigate to `localhost:8080/user` to begin running your own tests. Please reference [api-spec.yaml](/docs/api-spec.yaml) for more information.
+
+### Smoke Tests
 
 ## Development Log
+- 0.0.3 Initialized docker containerization
+- 0.0.2 Initialized Project
 - 0.0.1 Added Documentation Template
 
 
