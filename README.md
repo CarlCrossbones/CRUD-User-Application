@@ -1,7 +1,7 @@
 # CRUD-User-Application
 A CRUD (Create, Read, Update, Delete) User Application consisting of a Java SpringBoot API backend utilizing Java Persistence API and a PostgreSQL database housing Users (name, birth state, age).
 
-Version: 0.2.0
+Version: 0.3.0
 
 ### Table of Contents
 - [Local Dependencies](#local-dependencies)
@@ -78,6 +78,7 @@ Once Spring is started, you may run [smoke tests](#smoke-tests) to demonstrate t
 Preset Postman tests have been set up in [Smoke Tests](/smoke-tests/CRUD%20User%20Application%20Smoke%20Tests.postman_collection.json). To use this collection, open Postman, or the VSCode Postman extension and import the collection. You can then run the tests as needed. There is no set order. Therefore, if you want to test deleting a user, you would first have to test creating a user, etc.
 
 ## Development Log
+- 0.3.0 Added Update Endpoint `/users/update`
 - 0.2.0 Added Create endpoint `/users/create`
 - 0.1.0 Added Read endpoint `/users`
 - 0.0.6 Create Postman Preset Smoke Test File
@@ -90,7 +91,9 @@ Preset Postman tests have been set up in [Smoke Tests](/smoke-tests/CRUD%20User%
 ## Future Work
 - Add comprehensive input validation
 - Complete a Front End component
--
+- Make testing a part of the containerization process (CI/CD pipeline)
+- Add quality testing
+
 
 # Requirements
 Create a CRUD application that allows users to be created and updated within a system. In this scenario, let's say a user has a name, age, and birth state. The application should:

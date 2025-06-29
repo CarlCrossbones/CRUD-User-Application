@@ -2,6 +2,7 @@ package com.crud.user_app.controllers;
 
 import com.crud.user_app.persistent.User;
 import com.crud.user_app.persistent.UserRepository;
+import com.crud.user_app.persistent.UserUpdate;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -65,6 +66,60 @@ public class UserController {
         }
 
         userRepository.save(user);
+        return user;
+    }
+
+    /**
+     * UPDATE: An endpoint to update existing users in the database
+     * @param userUpdate defined in UserUpdate.java
+     * @return the updated user
+     */
+    @PatchMapping("/update")
+    @Transactional
+    public User updateUser(@Valid @RequestBody UserUpdate userUpdate) {
+        Optional<User> optionalUser;
+
+        // If blocks for Id vs. Name field entries
+        if (userUpdate.getId() != null) {
+            // If user exists in database, else throw error
+            if (userRepository.existsById(userUpdate.getId())) {
+                optionalUser = userRepository.findById(userUpdate.getId());
+            } else {
+                throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "User not found in database");
+            }
+        } else if (userUpdate.getName() != null) {
+            // If user exists in database, else throw error
+            if (userRepository.findByName(userUpdate.getName()) != null) {
+                optionalUser = userRepository.findByName(userUpdate.getName()).stream().findFirst();
+            } else {
+                throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "User not found in database");
+            }
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad Request");
+        }
+        // Convert Optional to User
+        User user = optionalUser.orElseThrow(() -> new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY));
+
+        UserUpdate.UpdateFields update = userUpdate.getUpdate();
+        
+        // If name update is present, update name
+        if (update.getName() != null) {
+            user.setName(update.getName());
+        }
+
+        // If age update is present, update age
+        if (update.getAge() != null) {
+            user.setAge(update.getAge());
+        }
+
+        // If birth state update is present, update birth state
+        if (update.getBirthState() != null) {
+            user.setBirthState(update.getBirthState());
+        }
+
+        //Update user's information in the database
+        userRepository.save(user);
+
         return user;
     }
 }
