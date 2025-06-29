@@ -17,8 +17,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.springframework.http.MediaType;
 
-import com.crud.user_app.persistence.User;
-import com.crud.user_app.persistence.UserRepository;
+import com.crud.user_app.persistent.User;
+import com.crud.user_app.persistent.UserRepository;
+
+import java.util.List;
 
 
 @SpringBootTest
@@ -54,11 +56,11 @@ class CreateTests {
     void testCreateUser() throws Exception {
         User user = new User("John Smith", 51, "OK");
         createUser(validInput);
-        User savedUser = userRepository.findByName("John Smith");
+        List<User> savedUsers = userRepository.findAll();
 
-        Assertions.assertEquals("John Smith", savedUser.getName());
-        Assertions.assertEquals(51, savedUser.getAge());
-        Assertions.assertEquals("OK", savedUser.getBirthState());
+        Assertions.assertEquals("John Smith", savedUsers.get(0).getName());
+        Assertions.assertEquals(51, savedUsers.get(0).getAge());
+        Assertions.assertEquals("OK", savedUsers.get(0).getBirthState());
     }
 
     @Test

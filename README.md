@@ -1,7 +1,7 @@
 # CRUD-User-Application
 A CRUD (Create, Read, Update, Delete) User Application consisting of a Java SpringBoot API backend utilizing Java Persistence API and a PostgreSQL database housing Users (name, birth state, age).
 
-Version: 0.0.6
+Version: 0.1.0
 
 ### Table of Contents
 - [Local Dependencies](#local-dependencies)
@@ -21,6 +21,12 @@ To run the service locally, you will need to install the following on your syste
 - docker:latest
 
 ## Backend Configuration
+The backend is run using Spring Data Java Persistence API. There four key endpoints following the CRUD operations of persistent storage:
+- CREATE: `/users/create`
+- READ: `/users`
+- UPDATE: `/users/update`
+- DELETE: `/users/delete`
+**Note**: for specific details about each endpoint, see the [OpenAPI Specification Chart](/docs/api-spec.yaml). This chart is best viewed using [Swagger UI](https://swagger.io/tools/swagger-ui/).
 
 ## Database Configuration
 The service utilizes a PostgreSQL for storage of user information. This database is hosted in a docker container via `docker-compose`. To run this database for local testing and development, ensure docker is running and run the following command:
@@ -43,6 +49,11 @@ docker compose down -v
 
 ### Running Outside of a Container
 For local development and testing, the Postgres database must be running. Please refer to [Database Configuration](#database-configuration). Before running either tests or the development server, you will need an `application.properties` file in the root of the project directory. See [application.properties.example](/docs/application.properties.example) for details.
+
+To run the service, issue the following command:
+```bash
+mvn spring-boot:run
+```
 
 
 ### Local Tests
@@ -67,6 +78,7 @@ Once Spring is started, you may run [smoke tests](#smoke-tests) to demonstrate t
 Preset Postman tests have been set up in [Smoke Tests](/smoke-tests/CRUD%20User%20Application%20Smoke%20Tests.postman_collection.json). To use this collection, open Postman, or the VSCode Postman extension and import the collection. You can then run the tests as needed. There is no set order. Therefore, if you want to test deleting a user, you would first have to test creating a user, etc.
 
 ## Development Log
+- 0.1.0 Added Read endpoint `/users`
 - 0.0.6 Create Postman Preset Smoke Test File
 - 0.0.5 Added integration/unit tests for Create & Read Endpoints
 - 0.0.4 Documented Test Integration
