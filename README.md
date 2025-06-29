@@ -29,8 +29,8 @@ The backend is run using Spring Data Java Persistence API. There are four key en
 - UPDATE: `/users/update`
 - DELETE: `/users/delete`
 
-These endpoints follow RESTful standards with the types of calls being used being GET, POST, PATCH, and DELETE. Furthermore, the Java classes are documented with standard Javadoc styles and should adhere to the Google Java Style guide.
-**Note**: for specific details about each endpoint, see the [OpenAPI Specification Chart](/docs/api-spec.yaml). This chart is best viewed using [Swagger UI](https://swagger.io/tools/swagger-ui/).
+These endpoints follow RESTful standards, with the types of calls being GET, POST, PATCH, and DELETE. Furthermore, the Java classes are documented with standard Javadoc styles and should adhere to the Google Java Style guide.
+- **Note**: For specific details about each endpoint, see the [OpenAPI Specification Chart](/docs/api-spec.yaml). This chart is best viewed using [Swagger UI](https://swagger.io/tools/swagger-ui/).
 
 ## Database Configuration
 The service utilizes a PostgreSQL database for storage of user information. This database is hosted in a docker container via `docker-compose`. To run this database for local testing and development, ensure docker is running and run the following command:
