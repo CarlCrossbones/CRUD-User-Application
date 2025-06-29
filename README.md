@@ -78,6 +78,7 @@ Once Spring is started, you may run [smoke tests](#smoke-tests) to demonstrate t
 Preset Postman tests have been set up in [Smoke Tests](/smoke-tests/CRUD%20User%20Application%20Smoke%20Tests.postman_collection.json). To use this collection, open Postman, or the VSCode Postman extension and import the collection. You can then run the tests as needed. There is no set order. Therefore, if you want to test deleting a user, you would first have to test creating a user, etc.
 
 ## Development Log
+- 0.4.0 Added Delete Endpoint `/users/delete`
 - 0.3.0 Added Update Endpoint `/users/update`
 - 0.2.0 Added Create endpoint `/users/create`
 - 0.1.0 Added Read endpoint `/users`
