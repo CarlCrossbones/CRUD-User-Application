@@ -1,3 +1,6 @@
+#### Copy the content of this file into a new file, application.properties,
+#### in the root of the project directory.
+
 # Database config
 spring.datasource.url=jdbc:postgresql://localhost:5432/userdb
 spring.datasource.username=user
