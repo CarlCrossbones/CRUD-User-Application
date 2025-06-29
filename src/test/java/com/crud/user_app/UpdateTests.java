@@ -20,29 +20,47 @@ import com.crud.user_app.persistent.User;
 import com.crud.user_app.persistent.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * A test suite for /users/update
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 class UpdateTests {
 
+    /**
+     * The database interaction object
+     */
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Provides the tests with the ability to hit endpoints
+     */
     @Autowired
     private MockMvc mockMvc;
 
+    /**
+     * A set up script
+     */
     @BeforeEach
     void setUp() {
         userRepository.deleteAll(); // Clear the repository before each test
         userRepository.save(new User("John Smith", 51, "OK"));
     }
 
+    /**
+     * A tear down script
+     */
     @AfterEach
     void tearDown() {
         userRepository.deleteAll(); // Clear the repository after each test
     }
 
+    /**
+     * A test to see that updating 1 parameter works
+     * @throws Exception handles exceptions
+     */
     @Test
-    // A test to see that updating 1 parameter works
     void testUpdateUserOne() throws Exception {
         String updateJson = """
                 {
@@ -65,8 +83,11 @@ class UpdateTests {
         
     }
 
+    /**
+     * A test to see that updating 2 parameters works
+     * @throws Exception handles exceptions
+     */
     @Test
-    // A test to see that updating 2 parameters works
     void testUpdateUserTwo() throws Exception {
         String updateJson = """
                 {
@@ -90,8 +111,11 @@ class UpdateTests {
         Assertions.assertEquals(53, updatedUser.getAge());
     }
 
+    /**
+     * A test to see that updating 3 parameters works
+     * @throws Exception handles exceptions
+     */
     @Test
-    // A test to see that updating 3 parameters works
     void testUpdateUserThree() throws Exception {
         String updateJson = """
                 {
@@ -117,8 +141,11 @@ class UpdateTests {
         Assertions.assertEquals("TX", updatedUser.getBirthState());
     }
 
+    /**
+     * A test to see that bad input is flagged
+     * @throws Exception handles exceptions
+     */
     @Test
-    // A test to see that bad input is flagged
     void testFlagsInvalidInput() throws Exception {
         String badInput = """
                 {
@@ -136,8 +163,11 @@ class UpdateTests {
             .andExpect(status().isBadRequest());
     }
 
+    /**
+     * A test to see that users not found is flagged
+     * @throws Exception handles exceptions
+     */
     @Test
-    // A test to see that users not found is flagged
     void testFlagsUserNotFound() throws Exception {
         String badInput = """
                 {
@@ -154,6 +184,4 @@ class UpdateTests {
             .content(badInput))
             .andExpect(status().is4xxClientError());
     }
-
-
 }

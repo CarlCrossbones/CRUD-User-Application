@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"John Smith\",\n    \"age\": 51,\n    \"birth-state\": \"OK\"\n}",
+							"raw": "{\n    \"name\": \"John Smith\",\n    \"age\": 51,\n    \"birthState\": \"OK\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -43,7 +43,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n        \"name\": \"John Smith\",\n        \"age\": 51,\n        \"birth-state\": \"OK\"\n}",
+									"raw": "{\n        \"name\": \"John Smith\",\n        \"age\": 51,\n        \"birthState\": \"OK\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -67,7 +67,7 @@
 							"_postman_previewlanguage": "Text",
 							"header": null,
 							"cookie": [],
-							"body": "Successfully added user: \n{\n    \"id\": 1,\n    \"name\": \"John Smith\",\n    \"age\": 51,\n    \"birth-state\": \"OK\"\n}"
+							"body": "Successfully added user: \n{\n    \"id\": 1,\n    \"name\": \"John Smith\",\n    \"age\": 51,\n    \"birthState\": \"OK\"\n}"
 						}
 					]
 				}
@@ -116,7 +116,7 @@
 							"_postman_previewlanguage": "JSON",
 							"header": null,
 							"cookie": [],
-							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"John Smith\",\n        \"age\": 51,\n        \"birth-state\": \"OK\"\n    }\n]"
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"John Smith\",\n        \"age\": 51,\n        \"birthState\": \"OK\"\n    }\n]"
 						}
 					]
 				},
@@ -172,7 +172,7 @@
 							"_postman_previewlanguage": "JSON",
 							"header": null,
 							"cookie": [],
-							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"John Smith\",\n        \"age\": 51,\n        \"birth-state\": \"OK\"\n    }\n]"
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"John Smith\",\n        \"age\": 51,\n        \"birthState\": \"OK\"\n    }\n]"
 						}
 					]
 				},
@@ -228,7 +228,7 @@
 							"_postman_previewlanguage": "JSON",
 							"header": null,
 							"cookie": [],
-							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"John Smith\",\n        \"age\": 51,\n        \"birth-state\": \"OK\"\n    }\n]"
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"John Smith\",\n        \"age\": 51,\n        \"birthState\": \"OK\"\n    }\n]"
 						}
 					]
 				},
@@ -284,7 +284,7 @@
 							"_postman_previewlanguage": "JSON",
 							"header": null,
 							"cookie": [],
-							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"John Smith\",\n        \"age\": 51,\n        \"birth-state\": \"OK\"\n    }\n]"
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"John Smith\",\n        \"age\": 51,\n        \"birthState\": \"OK\"\n    }\n]"
 						}
 					]
 				},
@@ -294,7 +294,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/users?birth-state=OK",
+							"raw": "localhost:8080/users?birthState=OK",
 							"host": [
 								"localhost"
 							],
@@ -304,7 +304,7 @@
 							],
 							"query": [
 								{
-									"key": "birth-state",
+									"key": "birthState",
 									"value": "OK"
 								}
 							]
@@ -318,7 +318,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/users?birth-state=\"OK\"",
+									"raw": "localhost:8080/users?birthState=\"OK\"",
 									"host": [
 										"localhost"
 									],
@@ -328,7 +328,7 @@
 									],
 									"query": [
 										{
-											"key": "birth-state",
+											"key": "birthState",
 											"value": "\"OK\""
 										}
 									]
@@ -340,7 +340,7 @@
 							"_postman_previewlanguage": "JSON",
 							"header": null,
 							"cookie": [],
-							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"John Smith\",\n        \"age\": 51,\n        \"birth-state\": \"OK\"\n    }\n]"
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"John Smith\",\n        \"age\": 51,\n        \"birthState\": \"OK\"\n    }\n]"
 						}
 					]
 				}
@@ -356,7 +356,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"John Smith\",\n  \"update\": {\n    \"name\": \"Bill Smith\",\n    \"age\": 52,\n    \"birth-state\": \"PA\"\n  }\n}",
+							"raw": "{\n  \"name\": \"John Smith\",\n  \"update\": {\n    \"name\": \"Bill Smith\",\n    \"age\": 52,\n    \"birthState\": \"PA\"\n  }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -383,7 +383,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"name\": \"John Smith\",\n  \"update\": {\n    \"name\": \"Bill Smith\",\n    \"age\": 52,\n    \"birth-state\": \"PA\"\n  }\n}",
+									"raw": "{\n  \"name\": \"John Smith\",\n  \"update\": {\n    \"name\": \"Bill Smith\",\n    \"age\": 52,\n    \"birthState\": \"PA\"\n  }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -407,7 +407,7 @@
 							"_postman_previewlanguage": "Text",
 							"header": null,
 							"cookie": [],
-							"body": "Sucessfully updated user:\n{\n  \"id\": 1,\n  \"name\": \"Bill Smith\",\n  \"age\": 52,\n  \"birth-state\": \"PA\"\n}"
+							"body": "Sucessfully updated user:\n{\n  \"id\": 1,\n  \"name\": \"Bill Smith\",\n  \"age\": 52,\n  \"birthState\": \"PA\"\n}"
 						}
 					]
 				}

@@ -22,14 +22,22 @@ import com.crud.user_app.persistent.UserRepository;
 
 import java.util.List;
 
-
+/**
+ * A test suite for testing /users/create
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 class CreateTests {
 
+    /**
+     * The database interaction object
+     */
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Provides the tests with the ability to hit endpoints
+     */
     @Autowired
     private MockMvc mockMvc;
 
@@ -41,18 +49,27 @@ class CreateTests {
             }
     """;
 
+    /**
+     * A set up script
+     */
     @BeforeEach
     void setUp() {
         userRepository.deleteAll(); // Clear the repository before each test
     }
 
+    /**
+     * A teardown script
+     */
     @AfterEach
     void tearDown() {
         userRepository.deleteAll(); // Clear the repository after each test
     }
 
+    /**
+     * A test to see that hitting /users/create successfully adds a user
+     * @throws Exception handles exceptions
+     */
     @Test
-    // A test to see that hitting /users/create successfully adds a user
     void testCreateUser() throws Exception {
         User user = new User("John Smith", 51, "OK");
         createUser(validInput);
@@ -63,8 +80,11 @@ class CreateTests {
         Assertions.assertEquals("OK", savedUsers.get(0).getBirthState());
     }
 
+    /**
+     * A test to see that hitting /users/create successfully blocks an invalid key or value
+     * @throws Exception handles exceptions
+     */
     @Test
-    // A test to see that hitting /users/create successfully blocks an invalid key or value
     void testFlagsInvalidInput() throws Exception{
         
         String invalidInput = """
@@ -80,8 +100,11 @@ class CreateTests {
         Assertions.assertTrue(userRepository.findAll().isEmpty(), "Repository should be empty after invalid input");
     }
 
+    /**
+     * A test to see that hitting /users/create successfully blocks a duplicate entry
+     * @throws Exception handles exceptions
+     */
     @Test
-    // A test to see that hitting /users/create successfully blocks a duplicate entry
     void testBlocksDuplicateEntry() throws Exception{
         createUser(validInput)
                 .andExpect(status().isOk());
@@ -91,6 +114,12 @@ class CreateTests {
         Assertions.assertEquals(1, userRepository.count(), "Repository should contain only one user after duplicate entry attempt");
     }
 
+    /**
+     * A class to handle the hitting of /users/create
+     * @param input the json payload
+     * @return A ResultActions object
+     * @throws Exception handles exception
+     */
     private ResultActions createUser(String input) throws Exception {
         return mockMvc.perform(post("/users/create")
                 .contentType(MediaType.APPLICATION_JSON)

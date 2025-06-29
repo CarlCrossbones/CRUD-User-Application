@@ -73,8 +73,6 @@ paths:
                     description: >-
                         Returns all users given no parameters. Returns specific or group of users given
                         certain parameters.
-                '400':
-                    description: Bad Request
             description: >-
                 Returns a list of all users when queried with no parameters. Returns specific or group user
                 data when queried with parameters.

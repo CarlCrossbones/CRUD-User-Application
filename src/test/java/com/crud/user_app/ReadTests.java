@@ -19,13 +19,22 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.crud.user_app.persistent.User;
 import com.crud.user_app.persistent.UserRepository;
 
+/**
+ * A test suite for /users
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 class ReadTests {
 
+    /**
+     * The database interaction object
+     */
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Provides the tests with the ability to hit endpoints
+     */
     @Autowired
     private MockMvc mockMvc;
 
@@ -37,6 +46,9 @@ class ReadTests {
             }
     """;
 
+    /**
+     * A set up script
+     */
     @BeforeEach
     void setUp() {
         userRepository.deleteAll(); // Clear the repository before each test
@@ -47,12 +59,19 @@ class ReadTests {
         userRepository.save(new User("Jane Doe", 30, "TX"));
     }
 
+    /**
+     * A tear down script
+     */
     @AfterEach
     void tearDown() {
         userRepository.deleteAll(); // Clear the repository after each test
     }
+
+    /**
+     * A test to see that hitting /users returns a list of all users
+     * @throws Exception handles exceptions
+     */
 	@Test
-	// A test to see that hitting /users returns a list of all users
 	void testReturnsAllUsers() throws Exception {
 		String responseJson = mockMvc.perform(get("/users"))
             .andExpect(status().isOk())
@@ -66,8 +85,11 @@ class ReadTests {
         Assertions.assertEquals("Jane Doe", users[3].getName());
 	}
 
+    /**
+     * A test to see that hitting /users with a query parameter id returns a particular user
+     * @throws Exception handles exceptions
+     */
     @Test
-	// A test to see that hitting /users with a query parameter id returns a particular user
 	void testReturnsWithId() throws Exception {
 
         String jsonResponse1 = mockMvc.perform(get("/users").param("name", "John Smith"))
@@ -92,9 +114,12 @@ class ReadTests {
         Assertions.assertEquals("John Smith", user1.getName());
 	}
 
+    /**
+     * A test to see that hitting /user with a query parameter name returns a particular user 
+     * (the repository should only allow for one entry per name)
+     * @throws Exception handles exceptions
+     */
     @Test
-	// A test to see that hitting /user with a query parameter name returns a particular user 
-    // (the repository should only allow for one entry per name)
 	void testReturnsWithName() throws Exception {
 		String jsonResponse = mockMvc.perform(get("/users").param("name", "John Smith"))
             .andExpect(status().isOk())
@@ -108,8 +133,11 @@ class ReadTests {
         Assertions.assertEquals("John Smith", user.getName());
 	}
 
+    /**
+     * A test to see that hitting /user with a query parameter age returns all users of that age
+     * @throws Exception handles exceptions
+     */
     @Test
-	// A test to see that hitting /user with a query parameter age returns all users of that age
 	void testReturnsWithAge() throws Exception {
 		String jsonResponse = mockMvc.perform(get("/users").param("age", "51"))
             .andExpect(status().isOk())
@@ -123,8 +151,11 @@ class ReadTests {
         Assertions.assertEquals("John Doe", users[1].getName());
 	}
 
+    /**
+     * A test to see that hitting /user with a query parameter birth state returns all users of that birth state
+     * @throws Exception handles exceptions
+     */
     @Test
-	// A test to see that hitting /user with a query parameter birth state returns all users of that birth state
 	void testReturnsWithState() throws Exception {
 		String jsonResponse = mockMvc.perform(get("/users").param("birthState", "TX"))
             .andExpect(status().isOk())
@@ -137,8 +168,11 @@ class ReadTests {
         Assertions.assertEquals("Jane Doe", users[0].getName());
 	}
 
+    /**
+     * A test to see that bad input returns all users
+     * @throws Exception handles exceptions
+     */
     @Test
-	// A test to see that bad input returns 400
 	void testFlagsInvalidInput() throws Exception {
 		String jsonResponse = mockMvc.perform(get("/users").param("foo", "bar"))
             .andExpect(status().isOk())
@@ -150,8 +184,11 @@ class ReadTests {
         Assertions.assertEquals(4, users.length);;
 	}
 
+    /**
+     * A test to see that no user found with query parameters returns empty.
+     * @throws Exception handles exceptions
+     */
     @Test
-	// A test to see that no user found with query parameters returns empty.
 	void testNoUserFound() throws Exception {
 		String jsonResponse = mockMvc.perform(get("/users").param("age", "21"))
             .andExpect(status().isOk())

@@ -23,6 +23,9 @@ import java.util.*;
 @RequestMapping("/users")
 public class UserController {
 
+    /**
+     * The database interaction object
+     */
     @Autowired
     private UserRepository userRepository;
 
@@ -123,6 +126,11 @@ public class UserController {
         return user;
     }
 
+    /**
+     * DELETE: An endpoint to delete a user given name or id
+     * @param userDelete defined in UserDelete.java
+     * @return the user that was just deleted
+     */
     @DeleteMapping("/delete")
     @Transactional
     public User deleteUser (@Valid @RequestBody UserDelete userDelete) {
@@ -150,6 +158,7 @@ public class UserController {
         // Convert Optional to User
         User user = optionalUser.orElseThrow(() -> new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY));
 
+        // Delete the user
         userRepository.delete(user);
 
         return user;

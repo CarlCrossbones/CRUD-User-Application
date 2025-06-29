@@ -3,6 +3,9 @@ package com.crud.user_app.persistent;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
+/**
+ * A class controlling the format for request bodies to the UPDATE endpoint
+ */
 public class UserUpdate {
     @Getter
     private Long id;

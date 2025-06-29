@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * A persistent User object representing an entry in the database.
- * Each User should have a name, age, and birthState.
+ * Each User should have a name, age, id, and birthState.
  */
 @Entity
 @NoArgsConstructor
@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class User {
     
     /**
-     * The id representing the objects place in the database.
+     * The id representing the object's place in the database.
      */
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
