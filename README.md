@@ -79,6 +79,7 @@ Once Spring is started, you may run [smoke tests](#smoke-tests) to demonstrate t
 Preset Postman tests have been set up in [Smoke Tests](/smoke-tests/CRUD%20User%20Application%20Smoke%20Tests.postman_collection.json). To use this collection, open Postman, or the VSCode Postman extension and import the collection. You can then run the tests as needed. There is no set order. Therefore, if you want to test deleting a user, you would first have to test creating a user, etc.
 
 ## Development Log
+- 0.5.2 Polished README
 - 0.5.1 Cleaned up documentation
 - 0.5.0 Cleaned up imports
 - 0.4.0 Added Delete Endpoint `/users/delete`
@@ -97,18 +98,7 @@ Preset Postman tests have been set up in [Smoke Tests](/smoke-tests/CRUD%20User%
 - Complete a Front End component
 - Make testing a part of the containerization process (CI/CD pipeline)
 - Add quality testing
-
-
-# Requirements
-Create a CRUD application that allows users to be created and updated within a system. In this scenario, let's say a user has a name, age, and birth state. The application should:
-- Create a public project in your github account
-- Create all CRUD operations with endpoints so that they can be tested with Postman or a curl
-- Create a backend container to house the CRUD operations
-- Create a database container of your choice to store and manipulate new and existing users
-- Utilize Docker for containerization
-- Create a docker-compose file to spin up both containers
-- Implement coding standards
-- Create integration tests
-- Compose a readme that shows how to test and run the application
-- Feel free to add anything if time permists
-- Complete by 6/30 end of day.
+- Add a "Delete All" endpoint
+- Add functionality to create multiple users at once
+- Add functionality to update multiple users at once
+- Add functionality to delete multiple users at once
