@@ -1,6 +1,7 @@
 package com.crud.user_app.controllers;
 
 import com.crud.user_app.persistent.User;
+import com.crud.user_app.persistent.UserDelete;
 import com.crud.user_app.persistent.UserRepository;
 import com.crud.user_app.persistent.UserUpdate;
 
@@ -119,6 +120,38 @@ public class UserController {
 
         //Update user's information in the database
         userRepository.save(user);
+
+        return user;
+    }
+
+    @DeleteMapping("/delete")
+    @Transactional
+    public User deleteUser (@Valid @RequestBody UserDelete userDelete) {
+        Optional<User> optionalUser;
+
+        // If blocks for Id vs. Name field entries
+        if (userDelete.getId() != null) {
+            // If user exists in database, else throw error
+            if (userRepository.existsById(userDelete.getId())) {
+                optionalUser = userRepository.findById(userDelete.getId());
+            } else {
+                throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "User not found in database");
+            }
+        } else if (userDelete.getName() != null) {
+            // If user exists in database, else throw error
+            if (userRepository.findByName(userDelete.getName()) != null) {
+                optionalUser = userRepository.findByName(userDelete.getName()).stream().findFirst();
+            } else {
+                throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "User not found in database");
+            }
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad Request");
+        }
+
+        // Convert Optional to User
+        User user = optionalUser.orElseThrow(() -> new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY));
+
+        userRepository.delete(user);
 
         return user;
     }

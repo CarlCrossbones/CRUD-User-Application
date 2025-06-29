@@ -132,6 +132,7 @@ paths:
                             examples:
                                 USER:
                                     value:
+                                        id: 1
                                         name: John Smith
                                         age: 51
                                         birthState: OK
@@ -258,10 +259,16 @@ paths:
                             examples:
                                 NAME:
                                     value:
+                                        id: 1
                                         name: John Smith
+                                        age: 51
+                                        birthState: OK
                                 ID:
                                     value:
-                                        ID: 1
+                                        id: 1
+                                        name: John Smith
+                                        age: 51
+                                        birthState: OK
                     description: Successfully Deleted
                 '400':
                     content:
