@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 
 /**
  * A persistent User object representing an entry in the database.

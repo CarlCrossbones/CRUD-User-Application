@@ -8,7 +8,6 @@ import com.crud.user_app.persistent.UserUpdate;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
-import com.crud.user_app.controllers.UserSpecification;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

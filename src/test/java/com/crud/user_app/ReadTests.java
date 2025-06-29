@@ -16,8 +16,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.springframework.http.MediaType;
-
 import com.crud.user_app.persistent.User;
 import com.crud.user_app.persistent.UserRepository;
 
