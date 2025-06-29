@@ -12,6 +12,7 @@ Version: 1.0.0
     - [Local Tests](#local-tests)
     - [Running The Containerized Service](#running-the-containerized-service)
     - [Smoke Tests](#smoke-tests)
+- [Features of Note](#features-of-note)
 - [Development Log](#development-log)
 - [Future Work](#future-work)
 
@@ -27,6 +28,8 @@ The backend is run using Spring Data Java Persistence API. There are four key en
 - READ: `/users`
 - UPDATE: `/users/update`
 - DELETE: `/users/delete`
+
+These endpoints follow RESTful standards with the types of calls being used being GET, POST, PATCH, and DELETE. Furthermore, the Java classes are documented with standard Javadoc styles and should adhere to the Google Java Style guide.
 **Note**: for specific details about each endpoint, see the [OpenAPI Specification Chart](/docs/api-spec.yaml). This chart is best viewed using [Swagger UI](https://swagger.io/tools/swagger-ui/).
 
 ## Database Configuration
@@ -77,6 +80,9 @@ Once Spring is started, you may run [smoke tests](#smoke-tests) to demonstrate t
 
 ### Smoke Tests
 Preset Postman tests have been set up in [Smoke Tests](/smoke-tests/CRUD%20User%20Application%20Smoke%20Tests.postman_collection.json). To use this collection, open Postman, or the VSCode Postman extension and import the collection. You can then run the tests as needed. There is no set order. Therefore, if you want to test deleting a user, you would first have to test creating a user, etc.
+
+## Features of Note
+- The READ endpoint, `/users` is able to return a list of all users, a list of a specific user, or a list of users meeting a certain criteria based on query parameters. Thus, `/users` can retain its status as a GET endpoint while note requiring a request body nor any extension of the url.
 
 ## Development Log
 - 1.0.0 Release 1
