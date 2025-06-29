@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-    title: CRUD User Application API
+    title: New API
     version: 1.0.0
     description: >-
         A CRUD (Create, Read, Update, Delete) User Application consisting of a Java SpringBoot API backend
@@ -20,6 +20,13 @@ paths:
                         type: string
                     in: query
                     required: false
+                -
+                    name: birthState
+                    description: Returns all users with given birthState.
+                    schema:
+                        type: string
+                    in: query
+                    required: false
             responses:
                 '200':
                     content:
@@ -34,42 +41,40 @@ paths:
                                             id: 1
                                             name: John Smith
                                             age: 51
-                                            birth-state: OK
+                                            birthState: OK
                                 id=1:
                                     value:
                                         -
                                             id: 1
                                             name: John Smith
                                             age: 51
-                                            birth-state: OK
+                                            birthState: OK
                                 name="John Smith":
                                     value:
                                         -
                                             id: 1
                                             name: John Smith
                                             age: 51
-                                            birth-state: OK
+                                            birthState: OK
                                 age=51:
                                     value:
                                         -
                                             id: 1
                                             name: John Smith
                                             age: 51
-                                            birth-state: OK
-                                birth-state="OK":
+                                            birthState: OK
+                                birthState="OK":
                                     value:
                                         -
                                             id: 1
                                             name: John Smith
                                             age: 51
-                                            birth-state: OK
+                                            birthState: OK
                     description: >-
                         Returns all users given no parameters. Returns specific or group of users given
                         certain parameters.
                 '400':
                     description: Bad Request
-                '422':
-                    description: No User matches given parameters
             description: >-
                 Returns a list of all users when queried with no parameters. Returns specific or group user
                 data when queried with parameters.
@@ -96,8 +101,8 @@ paths:
                 in: query
                 required: false
             -
-                name: birth-state
-                description: Returns all users with given birth-state.
+                name: birthState
+                description: Returns all users with given birthState.
                 schema:
                     type: string
                 in: query
@@ -116,7 +121,7 @@ paths:
                                 value:
                                     name: John Smith
                                     age: 51
-                                    birth-state: OK
+                                    birthState: OK
                 required: true
             responses:
                 '200':
@@ -129,7 +134,7 @@ paths:
                                     value:
                                         name: John Smith
                                         age: 51
-                                        birth-state: OK
+                                        birthState: OK
                     description: 'Successfully added user:'
                 '400':
                     content:
@@ -141,7 +146,7 @@ paths:
                                     value:
                                         name: John Smith
                                         age: 51
-                                        birth-state: OK
+                                        birthState: OK
                     description: 'There was an error adding the user:'
                 '422':
                     description: User with name <NAME> already exists
@@ -165,25 +170,25 @@ paths:
                                     name: John Smith
                                     update:
                                         age: 52
-                            BIRTH-STATE:
+                            birthState:
                                 value:
                                     name: John Smith
                                     update:
-                                        birth-state: PA
+                                        birthState: PA
                             MULTIPLE:
                                 value:
                                     name: John Smith
                                     update:
                                         name: Bill Smith
                                         age: 52
-                                        birth-state: PA
+                                        birthState: PA
                             BY ID:
                                 value:
                                     id: 1
                                     update:
                                         name: Bill Smith
                                         age: 52
-                                        birth-state: PA
+                                        birthState: PA
                 required: true
             responses:
                 '200':
@@ -197,7 +202,7 @@ paths:
                                         id: 1
                                         name: Bill Smith
                                         age: 52
-                                        birth-state: PA
+                                        birthState: PA
                     description: 'Successfully Updated User:'
                 '400':
                     content:
@@ -211,7 +216,7 @@ paths:
                                         update:
                                             name: Bill Smith
                                             age: 52
-                                            birth-state: PA
+                                            birthState: PA
                     description: Bad Request. One or more fields are invalid.
                 '422':
                     content:
@@ -225,7 +230,7 @@ paths:
                                         update:
                                             name: Bill Smith
                                             age: 52
-                                            birth-state: PA
+                                            birthState: PA
                     description: User not found in database.
             description: Updates a user's information given a name or id.
     /users/delete:
