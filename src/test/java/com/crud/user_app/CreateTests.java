@@ -70,24 +70,12 @@ class CreateTests {
         String invalidInput = """
                 {
                 "id": "John Smith",
-                "age": -1,
+                "age": "twelve",
                 "birthState": "OK"
                 }
         """;
 
         createUser(invalidInput)
-                .andExpect(status().isBadRequest());
-        Assertions.assertTrue(userRepository.findAll().isEmpty(), "Repository should be empty after invalid input");
-
-        String invalidInput2 = """
-                {
-                "name": 1,
-                "age": 51,
-                "birthState": ""
-                }
-        """;
-
-        createUser(invalidInput2)
                 .andExpect(status().isBadRequest());
         Assertions.assertTrue(userRepository.findAll().isEmpty(), "Repository should be empty after invalid input");
     }

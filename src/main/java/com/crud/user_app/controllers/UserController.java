@@ -4,6 +4,7 @@ import com.crud.user_app.persistent.User;
 import com.crud.user_app.persistent.UserRepository;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 import com.crud.user_app.controllers.UserSpecification;
 import org.springframework.data.jpa.domain.Specification;
@@ -57,15 +58,13 @@ public class UserController {
      */
     @PostMapping("/create")
     @Transactional
-    public User addUser(String name, Integer age, String birthState) {
+    public User addUser(@Valid @RequestBody User user) {
         // Prevent duplicate entries along the "name" parameter.
-        if (!userRepository.findByName(name).isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "User with name \""+name+"\" already exists");
+        if (!userRepository.findByName(user.getName()).isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "User with name \""+user.getName()+"\" already exists");
         }
 
-        User newUser = new User(name, age, birthState);
-
-        userRepository.save(newUser);
-        return newUser;
+        userRepository.save(user);
+        return user;
     }
 }

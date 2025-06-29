@@ -34,14 +34,14 @@ public class User {
     @NotNull
     @Getter
     @Setter
-    private int age;
+    private Integer age;
 
     @NotNull
     @Getter
     @Setter
     private String birthState;
 
-    public User (String name, int age, String birthState) {
+    public User (String name, Integer age, String birthState) {
         this.name = name;
         this.age = age;
         this.birthState = birthState;
