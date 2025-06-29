@@ -13,6 +13,7 @@ Version: 0.5.1
     - [Running The Containerized Service](#running-the-containerized-service)
     - [Smoke Tests](#smoke-tests)
 - [Development Log](#development-log)
+- [Future Work](#future-work)
 
 ## Local Dependencies
 To run the service locally, you will need to install the following on your system:
@@ -21,7 +22,7 @@ To run the service locally, you will need to install the following on your syste
 - docker:latest
 
 ## Backend Configuration
-The backend is run using Spring Data Java Persistence API. There four key endpoints following the CRUD operations of persistent storage:
+The backend is run using Spring Data Java Persistence API. There are four key endpoints following the CRUD operations of persistent storage:
 - CREATE: `/users/create`
 - READ: `/users`
 - UPDATE: `/users/update`
@@ -29,7 +30,7 @@ The backend is run using Spring Data Java Persistence API. There four key endpoi
 **Note**: for specific details about each endpoint, see the [OpenAPI Specification Chart](/docs/api-spec.yaml). This chart is best viewed using [Swagger UI](https://swagger.io/tools/swagger-ui/).
 
 ## Database Configuration
-The service utilizes a PostgreSQL for storage of user information. This database is hosted in a docker container via `docker-compose`. To run this database for local testing and development, ensure docker is running and run the following command:
+The service utilizes a PostgreSQL database for storage of user information. This database is hosted in a docker container via `docker-compose`. To run this database for local testing and development, ensure docker is running and run the following command:
 ```bash
 docker compose up --build postgres
 ```
@@ -48,7 +49,7 @@ docker compose down -v
 ## Running The Service
 
 ### Running Outside of a Container
-For local development and testing, the Postgres database must be running. Please refer to [Database Configuration](#database-configuration). Before running either tests or the development server, you will need an `application.properties` file in the root of the project directory. See [application.properties.example](/docs/application.properties.example) for details.
+For local development and testing, the Postgres database must be running. Please refer to [Database Configuration](#database-configuration) for help doing that. Before running either tests or the development server, you will need an `application.properties` file in the root of the project directory. See [application.properties.example](/docs/application.properties.example) for details.
 
 To run the service, issue the following command:
 ```bash
