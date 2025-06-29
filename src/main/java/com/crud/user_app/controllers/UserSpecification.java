@@ -1,4 +1,4 @@
-package com.crud.user_app.specification;
+package com.crud.user_app.controllers;
 
 import com.crud.user_app.persistent.User;
 import org.springframework.data.jpa.domain.Specification;
@@ -15,7 +15,7 @@ public class UserSpecification {
     }
 
     // Accounts for "age" key
-    public static Specification<User> hasAge(String age) {
+    public static Specification<User> hasAge(Integer age) {
         return (root, query, cb) ->
                 age == null ? null : cb.equal(root.get("age"), age);
     }
@@ -27,7 +27,7 @@ public class UserSpecification {
     }
 
     // Accounts for "id" key
-    public static Specification<User> hasId(String id) {
+    public static Specification<User> hasId(Long id) {
         return (root, query, cb) ->
                 id == null ? null : cb.equal(root.get("id"), id);
     }

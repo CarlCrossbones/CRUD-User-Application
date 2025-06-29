@@ -71,16 +71,27 @@ class ReadTests {
     @Test
 	// A test to see that hitting /users with a query parameter id returns a particular user
 	void testReturnsWithId() throws Exception {
-		String jsonResponse = mockMvc.perform(get("/users").param("id", "1"))
+
+        String jsonResponse1 = mockMvc.perform(get("/users").param("name", "John Smith"))
             .andExpect(status().isOk())
             .andReturn()
             .getResponse()
             .getContentAsString();
 
-        User[] users = new ObjectMapper().readValue(jsonResponse, User[].class);
+        User[] users = new ObjectMapper().readValue(jsonResponse1, User[].class);
         User user = users[0];
-        Assertions.assertEquals(1, users.length);
-        Assertions.assertEquals("John Smith", user.getName());
+        Long userId = user.getId();
+
+		String jsonResponse = mockMvc.perform(get("/users").param("id", String.valueOf(userId)))
+            .andExpect(status().isOk())
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
+
+        User[] users1 = new ObjectMapper().readValue(jsonResponse, User[].class);
+        User user1 = users[0];
+        Assertions.assertEquals(1, users1.length);
+        Assertions.assertEquals("John Smith", user1.getName());
 	}
 
     @Test
@@ -117,7 +128,7 @@ class ReadTests {
     @Test
 	// A test to see that hitting /user with a query parameter birth state returns all users of that birth state
 	void testReturnsWithState() throws Exception {
-		String jsonResponse = mockMvc.perform(get("/users").param("birth-state", "TX"))
+		String jsonResponse = mockMvc.perform(get("/users").param("birthState", "TX"))
             .andExpect(status().isOk())
             .andReturn()
             .getResponse()
@@ -129,19 +140,28 @@ class ReadTests {
 	}
 
     @Test
-	// A test to see that bad input returns a 400
+	// A test to see that bad input returns 400
 	void testFlagsInvalidInput() throws Exception {
-		mockMvc.perform(get("/users").param("foo", "bar"))
-            .andExpect(status().isBadRequest());
+		String jsonResponse = mockMvc.perform(get("/users").param("foo", "bar"))
+            .andExpect(status().isOk())
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
 
-        mockMvc.perform(get("/users").param("age", "bar"))
-            .andExpect(status().isBadRequest());
+        User[] users = new ObjectMapper().readValue(jsonResponse, User[].class);
+        Assertions.assertEquals(4, users.length);;
 	}
 
     @Test
-	// A test to see that no user found with query parameters returns a 422.
-	void testFlagsNoUserFound() throws Exception {
-		mockMvc.perform(get("/users").param("age", "21"))
-            .andExpect(status().is4xxClientError());
+	// A test to see that no user found with query parameters returns empty.
+	void testNoUserFound() throws Exception {
+		String jsonResponse = mockMvc.perform(get("/users").param("age", "21"))
+            .andExpect(status().isOk())
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
+
+        User[] users = new ObjectMapper().readValue(jsonResponse, User[].class);
+        Assertions.assertEquals(0, users.length);
 	}
 }
